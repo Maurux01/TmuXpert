@@ -1,0 +1,228 @@
+# =============================================================================
+# TMUX CONFIGURATION FOR WINDOWS - Optimized for Neovim VimX
+# =============================================================================
+
+# =============================================================================
+# BASIC SETTINGS
+# =============================================================================
+
+# Set prefix to Ctrl+Space (doesn't conflict with Neovim)
+unbind C-b
+set -g prefix C-Space
+bind Space send-prefix
+
+# Enable mouse support
+set -g mouse on
+
+# Start window numbering at 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# Automatically renumber windows
+set -g renumber-windows on
+
+# Increase scrollback buffer size
+set -g history-limit 50000
+
+# Increase message display time
+set -g display-time 4000
+
+# Set terminal colors for Windows
+set -g default-terminal "screen-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+
+# Enable focus events
+set -g focus-events on
+
+# =============================================================================
+# PLUGIN MANAGER - TPM (Tmux Plugin Manager)
+# =============================================================================
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Theme and Status Bar
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-urlview'
+
+# Session Management
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+set -g @plugin 'tmux-plugins/tmux-fpp'
+
+# Navigation and Search
+set -g @plugin 'tmux-plugins/tmux-fingers'
+set -g @plugin 'tmux-plugins/tmux-logging'
+
+# =============================================================================
+# PLUGIN CONFIGURATION
+# =============================================================================
+
+# Resurrect - Save/Restore sessions
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-nvim 'session'
+set -g @resurrect-dir '~/.tmux/resurrect'
+
+# Continuum - Auto save every 15 minutes
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '15'
+
+# Battery - Windows specific
+set -g @batt_icon_charge_tier8 ' '
+set -g @batt_icon_charge_tier7 ' '
+set -g @batt_icon_charge_tier6 ' '
+set -g @batt_icon_charge_tier5 ' '
+set -g @batt_icon_charge_tier4 ' '
+set -g @batt_icon_charge_tier3 ' '
+set -g @batt_icon_charge_tier2 ' '
+set -g @batt_icon_charge_tier1 ' '
+
+# =============================================================================
+# STATUS BAR CONFIGURATION - Windows Optimized
+# =============================================================================
+
+# Status bar colors
+set -g status-style bg=colour235,fg=colour136,default
+
+# Status bar left side - Windows compatible
+set -g status-left-length 40
+set -g status-left "#[fg=green]#S #[fg=black]• #[fg=green,bright]Windows#[default]"
+
+# Status bar right side - Windows compatible
+set -g status-right-length 60
+set -g status-right "#[fg=colour233,bg=colour241,bold] %H:%M#[default] #[fg=colour233,bg=colour245,bold] %d-%b#[default] #[fg=colour233,bg=colour241,bold] #(powershell -Command \"Get-WmiObject -Class Win32_Battery | Select-Object -ExpandProperty EstimatedChargeRemaining\")%%#[default]"
+
+# Window status
+set -g window-status-format " #I:#W#F "
+set -g window-status-current-format " #I:#W#F "
+set -g window-status-current-style bg=colour136,fg=colour235
+
+# =============================================================================
+# KEYBINDINGS - Optimized for Neovim VimX on Windows
+# =============================================================================
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display "Config reloaded!"
+
+# Split panes using | and -
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# Switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Resize panes using Alt+Shift+arrow
+bind -n M-S-Left resize-pane -L 5
+bind -n M-S-Right resize-pane -R 5
+bind -n M-S-Up resize-pane -U 5
+bind -n M-S-Down resize-pane -D 5
+
+# Switch windows using Alt+number
+bind -n M-1 select-window -t :1
+bind -n M-2 select-window -t :2
+bind -n M-3 select-window -t :3
+bind -n M-4 select-window -t :4
+bind -n M-5 select-window -t :5
+bind -n M-6 select-window -t :6
+bind -n M-7 select-window -t :7
+bind -n M-8 select-window -t :8
+bind -n M-9 select-window -t :9
+bind -n M-0 select-window -t :10
+
+# Quick window creation
+bind c new-window -c "#{pane_current_path}"
+bind C new-window
+
+# Kill pane/window
+bind x kill-pane
+bind X kill-window
+
+# Toggle zoom
+bind -r z resize-pane -Z
+
+# Synchronize panes
+bind y set-window-option synchronize-panes
+
+# =============================================================================
+# PLUGIN KEYBINDINGS
+# =============================================================================
+
+# Resurrect
+bind S run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+bind R run-shell '~/.tmux/plugins/tmux-resurrect/scripts/restore.sh'
+
+# Copycat
+bind -r / copy-mode \; send-keys -X search-backward
+bind -r ? copy-mode \; send-keys -X search-forward
+
+# Fingers
+bind F run-shell -b "~/.tmux/plugins/tmux-fingers/scripts/tmux-fingers.sh"
+
+# URL View
+bind u run-shell "~/.tmux/plugins/tmux-urlview/scripts/tmux-urlview.sh"
+
+# Sessionist
+bind C-f run-shell "~/.tmux/plugins/tmux-sessionist/scripts/kill_session.sh"
+bind C-s run-shell "~/.tmux/plugins/tmux-sessionist/scripts/switch_session.sh"
+
+# =============================================================================
+# COPY MODE - VI MODE (Windows Compatible)
+# =============================================================================
+
+# Use vi keys in copy mode
+setw -g mode-keys vi
+
+# Update default binding of `Enter` to also use copy-pipe (Windows compatible)
+unbind -T copy-mode-vi Enter
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "clip"
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "clip"
+
+# =============================================================================
+# NEOVIM INTEGRATION
+# =============================================================================
+
+# Set environment variables for Neovim
+set -g @resurrect-strategy-nvim 'session'
+set -g @resurrect-processes 'nvim'
+
+# =============================================================================
+# PERFORMANCE OPTIMIZATIONS
+# =============================================================================
+
+# Disable auto-rename
+set -g allow-rename off
+
+# Optimize for performance
+set -g escape-time 0
+set -g repeat-time 0
+
+# =============================================================================
+# WINDOWS SPECIFIC SETTINGS
+# =============================================================================
+
+# Better compatibility with Windows terminal
+set -g default-shell "powershell.exe"
+set -g default-command "powershell.exe"
+
+# Adjust for Windows path separators
+set -g @resurrect-processes 'nvim'
+set -g @resurrect-dir '~/.tmux/resurrect'
+
+# =============================================================================
+# INITIALIZE TPM
+# =============================================================================
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm' 
