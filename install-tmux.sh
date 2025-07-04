@@ -81,7 +81,6 @@ if [ -f ~/.tmux.conf ]; then
     cp ~/.tmux.conf ~/.tmux.conf.backup.$(date +%Y%m%d_%H%M%S)
 fi
 
-# Copy the configuration file
 cp .tmux.conf ~/.tmux.conf
 print_status "Tmux configuration installed"
 
@@ -132,99 +131,10 @@ EOF
 
 chmod +x ~/.tmux/battery.sh
 
-# Create theme switcher script
-print_header "Creating theme switcher..."
-
-cat > ~/.tmux/theme-switcher.sh << 'EOF'
-#!/bin/bash
-
-# Tmux theme switcher
-themes=(
-    "default"
-    "catppuccin"
-    "dracula"
-    "gruvbox"
-    "nord"
-    "tokyo-night"
-    "material"
-    "one-dark"
-    "solarized"
-    "monokai"
-)
-
-current_theme=$(tmux show-option -gqv @theme 2>/dev/null || echo "default")
-
-# Function to apply theme
-apply_theme() {
-    local theme=$1
-    case $theme in
-        "catppuccin")
-            tmux set -g status-style bg=colour240,fg=colour223
-            tmux set -g window-status-current-style bg=colour136,fg=colour235
-            ;;
-        "dracula")
-            tmux set -g status-style bg=colour53,fg=colour255
-            tmux set -g window-status-current-style bg=colour141,fg=colour53
-            ;;
-        "gruvbox")
-            tmux set -g status-style bg=colour237,fg=colour223
-            tmux set -g window-status-current-style bg=colour214,fg=colour237
-            ;;
-        "nord")
-            tmux set -g status-style bg=colour240,fg=colour255
-            tmux set -g window-status-current-style bg=colour109,fg=colour240
-            ;;
-        "tokyo-night")
-            tmux set -g status-style bg=colour235,fg=colour136
-            tmux set -g window-status-current-style bg=colour136,fg=colour235
-            ;;
-        "material")
-            tmux set -g status-style bg=colour238,fg=colour255
-            tmux set -g window-status-current-style bg=colour33,fg=colour238
-            ;;
-        "one-dark")
-            tmux set -g status-style bg=colour235,fg=colour188
-            tmux set -g window-status-current-style bg=colour33,fg=colour235
-            ;;
-        "solarized")
-            tmux set -g status-style bg=colour254,fg=colour66
-            tmux set -g window-status-current-style bg=colour33,fg=colour254
-            ;;
-        "monokai")
-            tmux set -g status-style bg=colour52,fg=colour255
-            tmux set -g window-status-current-style bg=colour197,fg=colour52
-            ;;
-        *)
-            tmux set -g status-style bg=colour235,fg=colour136,default
-            tmux set -g window-status-current-style bg=colour136,fg=colour235
-            ;;
-    esac
-    tmux set -g @theme $theme
-}
-
-# Show theme menu
-echo "Available themes:"
-for i in "${!themes[@]}"; do
-    if [ "${themes[$i]}" = "$current_theme" ]; then
-        echo "  $((i+1)). ${themes[$i]} (current)"
-    else
-        echo "  $((i+1)). ${themes[$i]}"
-    fi
-done
-
-echo ""
-read -p "Select theme (1-${#themes[@]}): " choice
-
-if [[ $choice =~ ^[0-9]+$ ]] && [ $choice -ge 1 ] && [ $choice -le ${#themes[@]} ]; then
-    selected_theme=${themes[$((choice-1))]}
-    apply_theme "$selected_theme"
-    echo "Theme changed to: $selected_theme"
-else
-    echo "Invalid selection"
-fi
-EOF
-
-chmod +x ~/.tmux/theme-switcher.sh
+# Copy advanced themes config
+print_header "Installing advanced themes configuration..."
+cp tmux-themes.conf ~/.tmux/tmux-themes.conf
+print_status "Advanced themes configuration installed at ~/.tmux/tmux-themes.conf"
 
 # Create quick reference
 print_header "Creating quick reference..."
@@ -266,7 +176,7 @@ cat > ~/.tmux/quick-ref.md << 'EOF'
 ### Plugins
 - **Fingers (URL/file detection)**: `prefix + F`
 - **URL view**: `prefix + u`
-- **Theme switcher**: `~/.tmux/theme-switcher.sh`
+- **Theme config**: `~/.tmux/tmux-themes.conf`
 
 ### Other
 - **Reload config**: `prefix + r`
@@ -281,13 +191,9 @@ The status bar shows:
 - Battery status
 - Time and date
 
-## Integration with Neovim VimX
+## Theme Usage
 
-This configuration is optimized to work seamlessly with your Neovim VimX setup:
-- Uses `Ctrl+Space` as prefix to avoid conflicts
-- Alt-based navigation that doesn't interfere with Neovim
-- Session persistence that works with Neovim sessions
-- Copy/paste integration with system clipboard
+To use a theme, open `~/.tmux/tmux-themes.conf` and copy the theme block you want into your `~/.tmux.conf` or source the file from your config. You can also manually set the theme colors using the commands in that file.
 
 ## Troubleshooting
 
@@ -357,8 +263,8 @@ echo "1. Start tmux: tmux"
 echo "2. Install plugins: prefix + I (Ctrl+Space, then I)"
 echo "3. Reload config: prefix + r"
 echo ""
-echo -e "${BLUE}🎨 Available themes:${NC}"
-echo "Run: ~/.tmux/theme-switcher.sh"
+echo -e "${BLUE}🎨 Themes:${NC}"
+echo "To use a theme, check ~/.tmux/tmux-themes.conf and copy the theme block you want into your ~/.tmux.conf or source the file."
 echo ""
 echo -e "${BLUE}📖 Quick reference:${NC}"
 echo "View: cat ~/.tmux/quick-ref.md"
