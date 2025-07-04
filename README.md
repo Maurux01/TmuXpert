@@ -1,305 +1,305 @@
-# 🚀 TmuxXpert - Configuración de Tmux Optimizada para Neovim VimX
+# 🚀 TmuXpert - Optimized Tmux Configuration for Neovim VimX
 
-Una configuración de Tmux rápida, útil y hermosa diseñada específicamente para trabajar perfectamente con tu configuración de Neovim VimX.
+A fast, useful, and beautiful Tmux configuration designed to work perfectly with your Neovim VimX setup.
 
-## ✨ Características Principales
+## ✨ Main Features
 
-### 🎯 Optimizado para Neovim VimX
-- **Prefix no conflictivo**: `Ctrl+Space` en lugar de `Ctrl+b`
-- **Keybinds inteligentes**: Alt-based navigation que no interfiere con Neovim
-- **Integración perfecta**: Session persistence compatible con Neovim
-- **Copy/paste mejorado**: Integración con clipboard del sistema
+### 🎯 Optimized for Neovim VimX
+- **Non-conflicting prefix**: `Ctrl+Space` instead of `Ctrl+b`
+- **Smart keybinds**: Alt-based navigation that doesn't interfere with Neovim
+- **Seamless integration**: Session persistence compatible with Neovim
+- **Enhanced copy/paste**: Integrated with the system clipboard
 
-### 🎨 19 Temas Hermosos
-- **Tokyo Night** - Elegante tema oscuro con acentos azules
-- **Catppuccin** - Suave tema con sabor a mocha
-- **Dracula** - Tema vibrante púrpura y rosa
-- **Gruvbox** - Clásico tema de alto contraste
-- **Nord** - Limpio tema inspirado en el Ártico
-- **Material** - Inspirado en Google Material Design
-- **One Dark** - Tema oscuro inspirado en Atom
-- **Solarized** - Tema oscuro amigable para los ojos
-- **Monokai** - Tema vibrante y colorido
-- **Rose Pine** - Tema natural de pino y lila
-- **Kanagawa** - Inspirado en la tradición japonesa
-- **Everforest** - Tema cálido inspirado en la naturaleza
-- **Doom One** - Inspirado en Doom Emacs
-- **Carbonfox** - Tema oscuro inspirado en Carbon
-- **Oxocarbon** - Sistema de diseño IBM Carbon
-- **Melange** - Tema oscuro cálido y acogedor
-- **Modus Vivendi** - Tema de alto contraste accesible
-- **Vim One** - Tema One Dark mejorado
-- **Papercolor** - Tema claro inspirado en Material Design
+### 🎨 19 Beautiful Themes
+- **Tokyo Night** - Elegant dark theme with blue accents
+- **Catppuccin** - Smooth mocha-flavored theme
+- **Dracula** - Vibrant purple and pink theme
+- **Gruvbox** - Classic high-contrast theme
+- **Nord** - Clean Arctic-inspired theme
+- **Material** - Google Material Design inspired
+- **One Dark** - Atom-inspired dark theme
+- **Solarized** - Eye-friendly dark theme
+- **Monokai** - Vibrant and colorful theme
+- **Rose Pine** - Natural pine and lilac theme
+- **Kanagawa** - Traditional Japanese-inspired
+- **Everforest** - Warm, nature-inspired theme
+- **Doom One** - Doom Emacs inspired
+- **Carbonfox** - Carbon-inspired dark theme
+- **Oxocarbon** - IBM Carbon design system
+- **Melange** - Warm and cozy dark theme
+- **Modus Vivendi** - Accessible high-contrast theme
+- **Vim One** - Enhanced One Dark theme
+- **Papercolor** - Material Design inspired light theme
 
-### 🔌 Plugins Esenciales
-- **TPM** - Gestor de plugins de Tmux
-- **Resurrect** - Guardar/restaurar sesiones automáticamente
-- **Continuum** - Auto-guardado cada 15 minutos
-- **Yank** - Copy/paste mejorado
-- **Fingers** - Detección de URLs y archivos
-- **URL View** - Vista rápida de URLs
-- **Sessionist** - Gestión avanzada de sesiones
-- **Copycat** - Búsqueda mejorada
-- **Battery** - Estado de batería en status bar
-- **CPU** - Información de CPU en status bar
+### 🔌 Essential Plugins
+- **TPM** - Tmux Plugin Manager
+- **Resurrect** - Auto-save/restore sessions
+- **Continuum** - Auto-save every 15 minutes
+- **Yank** - Enhanced copy/paste
+- **Fingers** - URL and file detection
+- **URL View** - Quick URL viewer
+- **Sessionist** - Advanced session management
+- **Copycat** - Enhanced search
+- **Battery** - Battery status in the status bar
+- **CPU** - CPU info in the status bar
 
-### ⚡ Performance Optimizado
-- **Inicio rápido**: Configuración optimizada para velocidad
-- **Lazy loading**: Plugins cargan solo cuando se necesitan
-- **Escape time 0**: Respuesta instantánea
-- **Scrollback aumentado**: 50,000 líneas de historial
+### ⚡ Performance Optimized
+- **Fast startup**: Configuration optimized for speed
+- **Lazy loading**: Plugins load only when needed
+- **Escape time 0**: Instant response
+- **Increased scrollback**: 50,000 lines of history
 
-## 🚀 Instalación Rápida
+## 🚀 Quick Installation
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 ```bash
-git clone https://github.com/tu-usuario/TmuXpert.git
+git clone https://github.com/your-user/TmuXpert.git
 cd TmuXpert
 ```
 
-### 2. Ejecutar el script de instalación
+### 2. Run the installation script
 ```bash
 chmod +x install-tmux.sh
 ./install-tmux.sh
 ```
 
-### 3. Instalar plugins (desde dentro de tmux)
+### 3. Install plugins (from inside tmux)
 ```bash
 tmux
-# Luego presionar: Ctrl+Space, luego I
+# Then press: Ctrl+Space, then I
 ```
 
-## 🎮 Keybinds Principales
+## 🎮 Main Keybinds
 
-### 🎯 Prefix y Navegación
-| Acción | Keybind |
+### 🎯 Prefix & Navigation
+| Action | Keybind |
 |--------|---------|
 | **Prefix** | `Ctrl+Space` |
-| **Nueva ventana** | `prefix + c` |
-| **Matar ventana** | `prefix + X` |
-| **Cambiar a ventana** | `Alt + número` (1-9, 0 para 10) |
+| **New window** | `prefix + c` |
+| **Kill window** | `prefix + X` |
+| **Switch window** | `Alt + number` (1-9, 0 for 10) |
 
-### 📱 Gestión de Paneles
-| Acción | Keybind |
+### 📱 Pane Management
+| Action | Keybind |
 |--------|---------|
-| **Split horizontal** | `prefix + \|` |
+| **Split horizontal** | `prefix + |` |
 | **Split vertical** | `prefix + -` |
-| **Matar panel** | `prefix + x` |
+| **Kill pane** | `prefix + x` |
 | **Toggle zoom** | `prefix + z` |
-| **Cambiar panel** | `Alt + flechas` |
-| **Redimensionar panel** | `Alt + Shift + flechas` |
+| **Switch pane** | `Alt + arrows` |
+| **Resize pane** | `Alt + Shift + arrows` |
 
-### 💾 Sesiones
-| Acción | Keybind |
+### 💾 Sessions
+| Action | Keybind |
 |--------|---------|
-| **Guardar sesión** | `prefix + S` |
-| **Restaurar sesión** | `prefix + R` |
-| **Matar sesión** | `prefix + Ctrl+f` |
-| **Cambiar sesión** | `prefix + Ctrl+s` |
+| **Save session** | `prefix + S` |
+| **Restore session** | `prefix + R` |
+| **Kill session** | `prefix + Ctrl+f` |
+| **Switch session** | `prefix + Ctrl+s` |
 
-### 🔍 Búsqueda y Copia
-| Acción | Keybind |
+### 🔍 Search & Copy
+| Action | Keybind |
 |--------|---------|
-| **Modo copia** | `prefix + [` |
-| **Buscar hacia atrás** | `prefix + /` |
-| **Buscar hacia adelante** | `prefix + ?` |
-| **Copiar selección** | `Enter` (en modo copia) |
+| **Copy mode** | `prefix + [` |
+| **Search backward** | `prefix + /` |
+| **Search forward** | `prefix + ?` |
+| **Copy selection** | `Enter` (in copy mode) |
 
 ### 🎨 Plugins
-| Acción | Keybind |
+| Action | Keybind |
 |--------|---------|
-| **Fingers (URLs/archivos)** | `prefix + F` |
+| **Fingers (URLs/files)** | `prefix + F` |
 | **URL view** | `prefix + u` |
-| **Cambiar tema** | `~/.tmux/theme-switcher.sh` |
+| **Theme switcher** | `~/.tmux/theme-switcher.sh` |
 
-### ⚙️ Otros
-| Acción | Keybind |
+### ⚙️ Other
+| Action | Keybind |
 |--------|---------|
-| **Recargar config** | `prefix + r` |
-| **Sincronizar paneles** | `prefix + y` |
+| **Reload config** | `prefix + r` |
+| **Synchronize panes** | `prefix + y` |
 
-## 🎨 Gestión de Temas
+## 🎨 Theme Management
 
-### Cambiar Tema Interactivamente
+### Change Theme Interactively
 ```bash
 ~/.tmux/theme-switcher.sh
 ```
 
-### Cambiar Tema Específico
+### Change to a Specific Theme
 ```bash
 ~/.tmux/theme-switcher.sh tokyo-night
 ~/.tmux/theme-switcher.sh dracula
 ~/.tmux/theme-switcher.sh catppuccin
 ```
 
-### Listar Temas Disponibles
+### List Available Themes
 ```bash
 ~/.tmux/theme-switcher.sh list
 ```
 
-### Tema Aleatorio
+### Random Theme
 ```bash
 ~/.tmux/theme-switcher.sh random
 ```
 
-### Ver Tema Actual
+### Show Current Theme
 ```bash
 ~/.tmux/theme-switcher.sh current
 ```
 
 ## 📊 Status Bar
 
-La barra de estado muestra información útil:
+The status bar displays useful information:
 
-### Lado Izquierdo
-- **Nombre de sesión**
-- **Versión del kernel**
-- **Ruta actual**
+### Left Side
+- **Session name**
+- **Kernel version**
+- **Current path**
 
-### Lado Derecho
-- **Carga del sistema**
-- **Estado de batería**
-- **Hora y fecha**
+### Right Side
+- **System load**
+- **Battery status**
+- **Time and date**
 
-## 🔧 Personalización
+## 🔧 Customization
 
-### Agregar Plugins
-Edita `~/.tmux.conf` y agrega en la sección de plugins:
-
-```bash
-set -g @plugin 'tu-plugin/nombre'
-```
-
-### Modificar Keybinds
-Edita `~/.tmux.conf` en la sección de keybindings:
+### Add Plugins
+Edit `~/.tmux.conf` and add in the plugins section:
 
 ```bash
-bind -n M-tu-tecla tu-accion
+set -g @plugin 'your-plugin/name'
 ```
 
-### Cambiar Colores
-Usa el theme switcher o edita directamente en `~/.tmux.conf`:
+### Modify Keybinds
+Edit `~/.tmux.conf` in the keybindings section:
+
+```bash
+bind -n M-yourkey your-action
+```
+
+### Change Colors
+Use the theme switcher or edit directly in `~/.tmux.conf`:
 
 ```bash
 set -g status-style "bg=colour235,fg=colour136"
 ```
 
-## 🐛 Solución de Problemas
+## 🐛 Troubleshooting
 
-### Plugins No Se Cargan
+### Plugins Not Loading
 ```bash
-# Desde dentro de tmux
-prefix + I  # Instalar plugins
-prefix + r  # Recargar configuración
+# From inside tmux
+prefix + I  # Install plugins
+prefix + r  # Reload configuration
 ```
 
-### Verificar Instalación
+### Verify Installation
 ```bash
 tmux -V
 ls ~/.tmux/plugins/
 ```
 
-### Logs de Plugins
+### Plugin Logs
 ```bash
-# Desde dentro de tmux
-prefix + I  # Ver logs de instalación
+# From inside tmux
+prefix + I  # View install logs
 ```
 
-### Problemas de Copy/Paste
+### Copy/Paste Issues
 ```bash
-# Verificar xclip
+# Check xclip
 which xclip
 
-# En macOS usar pbcopy
-# En Windows puede ser limitado
+# On macOS use pbcopy
+# On Windows it may be limited
 ```
 
-### Temas No Cambian
+### Themes Not Changing
 ```bash
-# Verificar script
+# Check script
 chmod +x ~/.tmux/theme-switcher.sh
 
-# Aplicar manualmente
+# Apply manually
 tmux set -g status-style "bg=colour235,fg=colour136"
 ```
 
-## 🚀 Inicio Rápido
+## 🚀 Quick Start
 
-### Script de Inicio
+### Startup Script
 ```bash
 ~/.tmux/start.sh
 ```
 
-### Comandos Útiles
+### Useful Commands
 ```bash
-# Ver referencia rápida
+# View quick reference
 cat ~/.tmux/quick-ref.md
 
-# Ver estado de batería
+# View battery status
 ~/.tmux/battery.sh
 
-# Cambiar tema
+# Change theme
 ~/.tmux/theme-switcher.sh
 ```
 
-## 📁 Estructura de Archivos
+## 📁 File Structure
 
 ```
 ~/.tmux/
-├── plugins/           # Plugins de TPM
-├── resurrect/         # Sesiones guardadas
-├── logs/             # Logs del sistema
-├── battery.sh        # Script de batería
-├── theme-switcher.sh # Gestor de temas
-├── start.sh          # Script de inicio
-└── quick-ref.md      # Referencia rápida
+├── plugins/           # TPM plugins
+├── resurrect/         # Saved sessions
+├── logs/              # System logs
+├── battery.sh         # Battery script
+├── theme-switcher.sh  # Theme manager
+├── start.sh           # Startup script
+└── quick-ref.md       # Quick reference
 
-~/.tmux.conf          # Configuración principal
+~/.tmux.conf           # Main configuration
 ```
 
-## 🎯 Integración con Neovim VimX
+## 🎯 Integration with Neovim VimX
 
-Esta configuración está diseñada para trabajar perfectamente con tu Neovim VimX:
+This configuration is designed to work perfectly with your Neovim VimX:
 
-### Compatibilidad
-- **Prefix no conflictivo**: `Ctrl+Space` no interfiere con Neovim
-- **Navegación Alt-based**: No afecta los keybinds de Neovim
-- **Session persistence**: Funciona con sesiones de Neovim
-- **Copy/paste**: Integración perfecta con clipboard
+### Compatibility
+- **Non-conflicting prefix**: `Ctrl+Space` does not interfere with Neovim
+- **Alt-based navigation**: Does not affect Neovim keybinds
+- **Session persistence**: Works with Neovim sessions
+- **Copy/paste**: Perfect integration with clipboard
 
-### Workflow Recomendado
-1. **Iniciar Tmux**: `tmux` o `~/.tmux/start.sh`
-2. **Abrir Neovim**: `nvim` en un panel
-3. **Navegar**: Usar `Alt+flechas` para cambiar paneles
-4. **Cambiar ventanas**: Usar `Alt+número` para ventanas
-5. **Cambiar tema**: `~/.tmux/theme-switcher.sh`
+### Recommended Workflow
+1. **Start Tmux**: `tmux` or `~/.tmux/start.sh`
+2. **Open Neovim**: `nvim` in a pane
+3. **Navigate**: Use `Alt+arrows` to switch panes
+4. **Switch windows**: Use `Alt+number` for windows
+5. **Change theme**: `~/.tmux/theme-switcher.sh`
 
-## 🤝 Contribuir
+## 🤝 Contributing
 
-¡Las contribuciones son bienvenidas! Por favor:
+Contributions are welcome! Please:
 
-1. Fork el repositorio
-2. Crea una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
+1. Fork the repository
+2. Create a branch for your feature
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
+This project is under the MIT license. See `LICENSE` for details.
 
-## 🙏 Créditos
+## 🙏 Credits
 
-- **LazyVim** - Base para la configuración de Neovim
-- **TPM** - Gestor de plugins de Tmux
-- **Comunidad Tmux** - Plugins y temas
+- **LazyVim** - Base for the Neovim configuration
+- **TPM** - Tmux Plugin Manager
+- **Tmux Community** - Plugins and themes
 
-## 🔗 Enlaces Útiles
+## 🔗 Useful Links
 
-- [Neovim VimX](https://github.com/Maurux01/VimX) - Tu configuración de Neovim
-- [TPM](https://github.com/tmux-plugins/tpm) - Gestor de plugins
-- [Tmux Manual](https://man.openbsd.org/tmux.1) - Documentación oficial
+- [Neovim VimX](https://github.com/Maurux01/VimX) - Your Neovim configuration
+- [TPM](https://github.com/tmux-plugins/tpm) - Plugin manager
+- [Tmux Manual](https://man.openbsd.org/tmux.1) - Official documentation
 
 ---
 
-**¡Disfruta tu nueva configuración de Tmux optimizada para Neovim VimX! 🚀**
+**Enjoy your new Tmux configuration optimized for Neovim VimX! 🚀**
