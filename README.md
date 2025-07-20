@@ -4,6 +4,7 @@ A fast, useful, and beautiful Tmux configuration designed specifically for Arch 
 
 ## ✨ Main Features
 
+
 ### 🎯 Optimized for Arch Linux
 - **Arch-specific packages**: Automatic installation of `xclip`, `upower`, `networkmanager`, `lm_sensors`
 - **Proper directory structure**: Uses `~/.config/tmux/` following XDG standards
