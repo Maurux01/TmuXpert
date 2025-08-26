@@ -205,7 +205,6 @@ cat > ~/.config/tmux/scripts/theme-switcher.sh << 'EOF'
 
 # Theme switcher for tmux
 THEMES_DIR="$HOME/.config/tmux/themes"
-CONFIG_FILE="$HOME/.config/tmux/tmux.conf"
 
 # Available themes
 themes=(
@@ -233,31 +232,35 @@ themes=(
 # Function to apply theme
 apply_theme() {
     local theme=$1
-    local theme_file="$THEMES_DIR/tmux-themes.conf"
     
-    if [ ! -f "$theme_file" ]; then
-        echo "Theme file not found: $theme_file"
-        exit 1
-    fi
-    
-    # Extract theme settings from tmux-themes.conf
-    local start_line=$(grep -n "THEME: $theme" "$theme_file" | cut -d: -f1)
-    if [ -z "$start_line" ]; then
-        echo "Theme '$theme' not found"
-        exit 1
-    fi
-    
-    local end_line=$(grep -n "THEME:" "$theme_file" | grep -A1 "THEME: $theme" | tail -1 | cut -d: -f1)
-    if [ "$end_line" = "$start_line" ]; then
-        end_line=$(wc -l < "$theme_file")
-    fi
-    
-    # Apply theme settings
-    sed -n "${start_line},${end_line}p" "$theme_file" | grep "set -g @" | while read line; do
-        tmux $line
-    done
+    case "$theme" in
+        "tokyo-night")
+            tmux set -g status-style "bg=#1a1b26,fg=#a9b1d6"
+            tmux set -g window-status-current-style "bg=#7aa2f7,fg=#1a1b26,bold"
+            tmux set -g status-left "#[bg=#7aa2f7,fg=#1a1b26,bold]  󰌢 #S #[bg=#1a1b26,fg=#7aa2f7,nobold]#[bg=#1a1b26,fg=#9aa5ce] 󰍛 #(uname -r | cut -c 1-6) #[fg=#1a1b26]#[default]#[bg=#1a1b26,fg=#bb9af7] 󰉋 #{pane_current_path} #[default]"
+            tmux set -g status-right "#[fg=#1a1b26,bg=#7aa2f7]#[fg=#7aa2f7,bg=#9aa5ce] 󰍛 #(bash ~/.config/tmux/scripts/sysinfo.sh) #[fg=#9aa5ce,bg=#e0af68] 󰖩 #(bash ~/.config/tmux/scripts/network.sh) #[fg=#e0af68,bg=#f7768e] 󰋊 #(bash ~/.config/tmux/scripts/disk.sh) #[fg=#f7768e,bg=#7dcfff] 󰂀 #(bash ~/.config/tmux/scripts/battery.sh) #[fg=#7dcfff,bg=#1a1b26] 󰐺 %H:%M #[fg=#a9b1d6,bg=#1a1b26] 󰃭 %d-%b #[default]"
+            ;;
+        "catppuccin")
+            tmux set -g status-style "bg=#1e1e2e,fg=#cdd6f4"
+            tmux set -g window-status-current-style "bg=#f5c2e7,fg=#1e1e2e,bold"
+            tmux set -g status-left "#[bg=#f5c2e7,fg=#1e1e2e,bold]  󰌢 #S #[bg=#1e1e2e,fg=#f5c2e7,nobold]#[bg=#1e1e2e,fg=#a6e3a1] 󰍛 #(uname -r | cut -c 1-6) #[fg=#1e1e2e]#[default]#[bg=#1e1e2e,fg=#c4a7e7] 󰉋 #{pane_current_path} #[default]"
+            tmux set -g status-right "#[fg=#1e1e2e,bg=#f5c2e7]#[fg=#f5c2e7,bg=#a6e3a1] 󰍛 #(bash ~/.config/tmux/scripts/sysinfo.sh) #[fg=#a6e3a1,bg=#fab387] 󰖩 #(bash ~/.config/tmux/scripts/network.sh) #[fg=#fab387,bg=#f38ba8] 󰋊 #(bash ~/.config/tmux/scripts/disk.sh) #[fg=#f38ba8,bg=#89b4fa] 󰂀 #(bash ~/.config/tmux/scripts/battery.sh) #[fg=#89b4fa,bg=#1e1e2e] 󰐺 %H:%M #[fg=#cdd6f4,bg=#1e1e2e] 󰃭 %d-%b #[default]"
+            ;;
+        "dracula")
+            tmux set -g status-style "bg=#282a36,fg=#f8f8f2"
+            tmux set -g window-status-current-style "bg=#bd93f9,fg=#282a36,bold"
+            tmux set -g status-left "#[bg=#bd93f9,fg=#282a36,bold]  󰌢 #S #[bg=#282a36,fg=#bd93f9,nobold]#[bg=#282a36,fg=#50fa7b] 󰍛 #(uname -r | cut -c 1-6) #[fg=#282a36]#[default]#[bg=#282a36,fg=#ff79c6] 󰉋 #{pane_current_path} #[default]"
+            tmux set -g status-right "#[fg=#282a36,bg=#bd93f9]#[fg=#bd93f9,bg=#50fa7b] 󰍛 #(bash ~/.config/tmux/scripts/sysinfo.sh) #[fg=#50fa7b,bg=#ffb86c] 󰖩 #(bash ~/.config/tmux/scripts/network.sh) #[fg=#ffb86c,bg=#ff5555] 󰋊 #(bash ~/.config/tmux/scripts/disk.sh) #[fg=#ff5555,bg=#8be9fd] 󰂀 #(bash ~/.config/tmux/scripts/battery.sh) #[fg=#8be9fd,bg=#282a36] 󰐺 %H:%M #[fg=#f8f8f2,bg=#282a36] 󰃭 %d-%b #[default]"
+            ;;
+        # Add other theme cases here with the actual tmux commands
+        *)
+            echo "Theme '$theme' configuration not implemented yet"
+            return 1
+            ;;
+    esac
     
     echo "Theme '$theme' applied successfully!"
+    return 0
 }
 
 # Function to list themes
@@ -300,7 +303,14 @@ case "${1:-}" in
         list_themes
         ;;
     *)
-        apply_theme "$1"
+        if apply_theme "$1"; then
+            # Reload tmux configuration to ensure all changes take effect
+            tmux source-file ~/.config/tmux/tmux.conf
+            echo "Theme applied and configuration reloaded!"
+        else
+            echo "Failed to apply theme '$1'"
+            exit 1
+        fi
         ;;
 esac
 EOF
