@@ -2,6 +2,7 @@
 
 A fast, useful, and beautiful Tmux configuration designed specifically for Arch Linux with full NerdFonts support and modern plugin management.
 
+
 ## ✨ Main Features
 
 
