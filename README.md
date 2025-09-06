@@ -4,6 +4,7 @@ A fast, useful, and beautiful Tmux configuration designed specifically for Arch 
 
 
 
+
 ## ✨ Main Features
 
 
